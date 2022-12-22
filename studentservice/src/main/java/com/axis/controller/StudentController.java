@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.axis.dto.StudentDto;
@@ -38,21 +39,21 @@ public class StudentController {
 		return new ResponseEntity<List<StudentDto>>(studentDtos,HttpStatus.OK);
 	}
 	
-	@PutMapping("/student/{studentId}")
-	public ResponseEntity<StudentDto> updateStudentById(@PathVariable int studentId,@RequestBody StudentDto studentDto){
+	@PutMapping("/student")
+	public ResponseEntity<StudentDto> updateStudentById(@RequestParam int studentId,@RequestBody StudentDto studentDto){
 		StudentDto studentDto2=studentService.updateStudentByID(studentId, studentDto);
 		return new ResponseEntity<StudentDto>(studentDto2,HttpStatus.OK);
 		
 	}
 	
 	@DeleteMapping("/student/{studentId}")
-	public ResponseEntity<String> deleteStudentById(@PathVariable int studentId){
+	public ResponseEntity<String> deleteStudentById(@RequestParam int studentId){
 		String message=studentService.deleteStudentByID(studentId);
 		return new ResponseEntity<String>(message,HttpStatus.OK);
 	}
 	
 	@GetMapping("/student/{studentId}")
-	public ResponseEntity<StudentDto> getStudentById(@PathVariable int studentId)
+	public ResponseEntity<StudentDto> getStudentById(@RequestParam int studentId)
 	{
 		StudentDto studentDto=studentService.getStudentByID(studentId);
 		return new ResponseEntity<StudentDto>(studentDto,HttpStatus.OK);
